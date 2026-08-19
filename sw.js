@@ -1,7 +1,7 @@
 'use strict';
 
 // Incrémenter ce numéro de version à chaque déploiement pour invalider l'ancien cache.
-const CACHE_NAME = 'fr-it-voyage-v8';
+const CACHE_NAME = 'fr-it-voyage-v9';
 
 const PRECACHE_URLS = [
   './',
@@ -17,9 +17,16 @@ const PRECACHE_URLS = [
 ];
 
 self.addEventListener('install', (event) => {
+  // On force le contournement du cache HTTP du navigateur (cache: 'reload') :
+  // sans ça, le précache pouvait récupérer une version d'index.html/app.js
+  // encore fraîche dans le cache du navigateur mais déjà obsolète côté déploiement.
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then((cache) => Promise.all(
+        PRECACHE_URLS.map((url) =>
+          fetch(url, { cache: 'reload' }).then((response) => cache.put(url, response))
+        )
+      ))
       .then(() => self.skipWaiting())
   );
 });
