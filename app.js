@@ -130,6 +130,58 @@ function initDirection() {
   });
 }
 
+/* ---------- Grosse déco "pour le fun" : pluie de confettis italiens sur un favori ---------- */
+const CONFETTI_EMOJI = ['🍕', '🛵', '🇮🇹', '🍋', '🍝', '🤌', '🎉'];
+function spawnConfetti(x, y) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  for (let i = 0; i < 12; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    piece.textContent = CONFETTI_EMOJI[Math.floor(Math.random() * CONFETTI_EMOJI.length)];
+    const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.1; // large éventail vers le haut
+    const dist = 60 + Math.random() * 70;
+    piece.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
+    piece.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
+    piece.style.setProperty('--rot', `${Math.random() * 360 - 180}deg`);
+    piece.style.left = `${x}px`;
+    piece.style.top = `${y}px`;
+    document.body.appendChild(piece);
+    piece.addEventListener('animationend', () => piece.remove());
+  }
+}
+
+/* ---------- Fond décoratif : mêmes emojis que les confettis, dispersés partout ---------- */
+function initBackgroundDecor() {
+  const container = document.getElementById('decor-bg-global');
+  if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const cols = 4;
+  const rows = 5;
+  let i = 0;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const span = document.createElement('span');
+      span.className = 'decor-emoji';
+      span.textContent = CONFETTI_EMOJI[i % CONFETTI_EMOJI.length];
+
+      const cellW = 100 / cols;
+      const cellH = 100 / rows;
+      const jitterX = (Math.random() - 0.5) * cellW * 0.8;
+      const jitterY = (Math.random() - 0.5) * cellH * 0.8;
+      span.style.left = `${c * cellW + cellW / 2 + jitterX}%`;
+      span.style.top = `${r * cellH + cellH / 2 + jitterY}%`;
+
+      span.style.setProperty('--size', `${2 + Math.random() * 2.4}rem`);
+      span.style.setProperty('--op', `${0.09 + Math.random() * 0.1}`);
+      span.style.setProperty('--dur', `${5 + Math.random() * 4}s`);
+      span.style.setProperty('--delay', `${Math.random() * 5}s`);
+
+      container.appendChild(span);
+      i++;
+    }
+  }
+}
+
 /* ---------- Favoris ---------- */
 function toggleFavorite(id) {
   if (state.favorites.has(id)) {
@@ -338,8 +390,13 @@ function makePhraseCard(phrase, l) {
     </div>
   `;
 
-  li.querySelector('.fav-btn').addEventListener('click', () => {
+  li.querySelector('.fav-btn').addEventListener('click', (e) => {
+    const wasFav = state.favorites.has(phrase.id);
     toggleFavorite(phrase.id);
+    if (!wasFav) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
     renderCurrentView();
   });
   // L'audio est toujours en italien, quel que soit le sens de traduction affiché
@@ -439,6 +496,7 @@ async function init() {
   initVoiceSettings();
   initOfflineBanner();
   initServiceWorker();
+  initBackgroundDecor();
 
   try {
     const res = await fetch('phrases.json');
