@@ -1,7 +1,7 @@
 'use strict';
 
 // Incrémenter ce numéro de version à chaque déploiement pour invalider l'ancien cache.
-const CACHE_NAME = 'fr-it-voyage-v9';
+const CACHE_NAME = 'fr-it-voyage-v10';
 
 const PRECACHE_URLS = [
   './',
