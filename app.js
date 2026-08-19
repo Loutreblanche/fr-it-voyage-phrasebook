@@ -26,6 +26,7 @@ const CATEGORIES = [
   { id: 'hopital', group: 'phrases', name: 'Hôpital, pharmacie & médicaments', icon: '🏥', count: 18 },
   { id: 'meteo', group: 'phrases', name: 'Météo', icon: '⛅', count: 10 },
   { id: 'telephone', group: 'phrases', name: 'Téléphone & connexion', icon: '📶', count: 10 },
+  { id: 'quotidien', group: 'phrases', name: 'Vie quotidienne & conversation', icon: '🗨️', count: 50 },
   { id: 'lex-viandes', group: 'lexique', name: 'Viandes & volailles', icon: '🍖', count: 12 },
   { id: 'lex-poissons', group: 'lexique', name: 'Poissons & fruits de mer', icon: '🐟', count: 14 },
   { id: 'lex-legumes', group: 'lexique', name: 'Légumes', icon: '🥕', count: 12 },

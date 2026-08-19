@@ -44,6 +44,7 @@ const EXPECTED_COUNTS = {
   hopital: 18,
   meteo: 10,
   telephone: 10,
+  quotidien: 50,
   'lex-viandes': 12,
   'lex-poissons': 14,
   'lex-legumes': 12,
