@@ -146,6 +146,32 @@ button {
   outline-offset: -1px;
 }
 
+/* Bande décorative dans l'en-tête : toujours visible car l'en-tête est épinglé */
+.header-decor-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.header-decor-emoji {
+  display: inline-block;
+  font-size: 1.7rem;
+  animation: header-decor-bob 2.6s ease-in-out infinite;
+}
+
+.header-decor-emoji:nth-child(1) { animation-delay: 0s; }
+.header-decor-emoji:nth-child(2) { animation-delay: 0.3s; }
+.header-decor-emoji:nth-child(3) { animation-delay: 0.6s; }
+.header-decor-emoji:nth-child(4) { animation-delay: 0.9s; }
+.header-decor-emoji:nth-child(5) { animation-delay: 1.2s; }
+.header-decor-emoji:nth-child(6) { animation-delay: 1.5s; }
+
+@keyframes header-decor-bob {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-6px) rotate(8deg); }
+}
+
 /* Mascotte pizza à côté du titre */
 .title-mascot {
   display: inline-block;
@@ -208,7 +234,7 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .decor-bg-global .decor-emoji, .confetti-piece, .title-mascot {
+  .decor-bg-global .decor-emoji, .confetti-piece, .title-mascot, .header-decor-emoji {
     animation: none !important;
   }
 }

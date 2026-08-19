@@ -171,8 +171,8 @@ function initBackgroundDecor() {
       span.style.left = `${c * cellW + cellW / 2 + jitterX}%`;
       span.style.top = `${r * cellH + cellH / 2 + jitterY}%`;
 
-      span.style.setProperty('--size', `${2 + Math.random() * 2.4}rem`);
-      span.style.setProperty('--op', `${0.09 + Math.random() * 0.1}`);
+      span.style.setProperty('--size', `${2.4 + Math.random() * 2.8}rem`);
+      span.style.setProperty('--op', `${0.16 + Math.random() * 0.14}`);
       span.style.setProperty('--dur', `${5 + Math.random() * 4}s`);
       span.style.setProperty('--delay', `${Math.random() * 5}s`);
 
