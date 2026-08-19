@@ -1,7 +1,7 @@
 'use strict';
 
 // Incrémenter ce numéro de version à chaque déploiement pour invalider l'ancien cache.
-const CACHE_NAME = 'fr-it-voyage-v11';
+const CACHE_NAME = 'fr-it-voyage-v12';
 
 const PRECACHE_URLS = [
   './',
@@ -10,10 +10,10 @@ const PRECACHE_URLS = [
   './app.js',
   './phrases.json',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-192-maskable.png',
-  './icons/icon-512-maskable.png',
+  './icons/icon-192-v2.png',
+  './icons/icon-512-v2.png',
+  './icons/icon-192-maskable-v2.png',
+  './icons/icon-512-maskable-v2.png',
 ];
 
 self.addEventListener('install', (event) => {
