@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FR-IT Voyage — Phrasebook</title>
+<meta name="description" content="Répertoire de phrases français ⇄ italien pour voyager, utilisable hors-ligne.">
+<meta name="theme-color" content="#0d7377">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<!-- iOS ne lit pas manifest.json pour l'icône d'accueil : balises dédiées -->
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FR-IT Voyage">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-row">
+    <h1 class="app-title">FR-IT <span class="flag-sep">⇄</span> Voyage</h1>
+    <div class="header-actions">
+      <button id="voice-settings-btn" class="icon-btn" type="button" aria-label="Choisir la voix italienne" title="Voix italienne">🎙️</button>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Changer de thème" title="Mode clair / sombre">
+        <span id="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </div>
+
+  <button id="direction-switch" class="direction-switch" type="button" aria-label="Inverser le sens de traduction">
+    <span class="dir-lang dir-source">
+      <span class="dir-flag">🇫🇷</span><span class="dir-name">Français</span>
+    </span>
+    <span class="dir-arrow" aria-hidden="true">→</span>
+    <span class="dir-lang dir-target">
+      <span class="dir-flag">🇮🇹</span><span class="dir-name">Italien</span>
+    </span>
+  </button>
+
+  <div class="search-row">
+    <input id="search-input" type="search" inputmode="search" placeholder="Rechercher une phrase ou un mot…" aria-label="Rechercher">
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- Vue catégories -->
+  <section id="view-categories" class="view">
+    <div id="categories-grid" class="categories-grid"></div>
+  </section>
+
+  <!-- Vue phrases d'une catégorie -->
+  <section id="view-phrases" class="view hidden">
+    <button id="back-btn" class="back-btn" type="button">← Catégories</button>
+    <h2 id="category-title" class="category-title"></h2>
+    <ul id="phrases-list" class="phrases-list"></ul>
+  </section>
+
+  <!-- Vue résultats de recherche -->
+  <section id="view-search" class="view hidden">
+    <h2 class="category-title">Résultats de recherche</h2>
+    <ul id="search-results-list" class="phrases-list"></ul>
+    <p id="search-empty" class="empty-msg hidden">Aucun résultat.</p>
+  </section>
+</main>
+
+<!-- Mode plein écran "montrer l'écran" -->
+<div id="big-mode" class="big-mode hidden">
+  <button id="big-mode-close" class="big-mode-close" type="button" aria-label="Fermer">✕</button>
+  <p id="big-mode-text" class="big-mode-text"></p>
+  <button id="big-mode-speak" class="icon-btn big-mode-speak" type="button" aria-label="Écouter en italien">🔊</button>
+</div>
+
+<!-- Panneau de choix de la voix italienne -->
+<div id="voice-panel" class="voice-panel hidden">
+  <div class="voice-panel-inner">
+    <div class="voice-panel-header">
+      <h2>Voix italienne</h2>
+      <button id="voice-panel-close" class="icon-btn" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <p class="voice-panel-hint">Choisissez la voix utilisée pour la prononciation. Ce choix est propre à cet appareil.</p>
+    <p id="voice-panel-empty" class="empty-msg hidden">Aucune voix italienne trouvée sur cet appareil. Vérifiez les paramètres vocaux (Réglages → Accessibilité → Contenu énoncé, ou équivalent Android) et installez une voix italienne si besoin.</p>
+    <ul id="voice-list" class="voice-list"></ul>
+  </div>
+</div>
+
+<div id="offline-banner" class="offline-banner hidden">📡 Hors-ligne — l'appli fonctionne normalement</div>
+
+<script src="app.js"></script>
+</body>
+</html>

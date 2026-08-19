@@ -1,0 +1,442 @@
+/* ---------- Thème : palette clair / sombre via variables CSS ---------- */
+:root {
+  --bg: #faf8f5;
+  --bg-elevated: #ffffff;
+  --text: #1e1e1e;
+  --text-muted: #6b6b6b;
+  --accent: #0d7377;
+  --accent-contrast: #ffffff;
+  --border: #e4dfd6;
+  --star: #d4a017;
+  --danger: #c0392b;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --radius: 14px;
+}
+
+:root[data-theme="dark"] {
+  --bg: #14171a;
+  --bg-elevated: #1e2226;
+  --text: #f2f2f0;
+  --text-muted: #a0a5aa;
+  --accent: #2dd4d9;
+  --accent-contrast: #0a0a0a;
+  --border: #2c3136;
+  --star: #f0c419;
+  --danger: #e57373;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171a;
+    --bg-elevated: #1e2226;
+    --text: #f2f2f0;
+    --text-muted: #a0a5aa;
+    --accent: #2dd4d9;
+    --accent-contrast: #0a0a0a;
+    --border: #2c3136;
+    --star: #f0c419;
+    --danger: #e57373;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- En-tête ---------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.flag-sep {
+  color: var(--accent);
+}
+
+.icon-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.direction-switch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+}
+
+.dir-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.dir-flag { font-size: 1.3rem; }
+.dir-arrow { color: var(--accent); font-weight: 700; }
+
+.search-row input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.search-row input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* ---------- Contenu ---------- */
+#main-content {
+  padding: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.view.hidden { display: none; }
+
+/* Grille de catégories */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.category-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  box-shadow: var(--shadow);
+  text-align: left;
+  color: var(--text);
+}
+
+.category-card .cat-icon { font-size: 1.6rem; }
+.category-card .cat-name { font-weight: 600; font-size: 0.92rem; line-height: 1.25; }
+.category-card .cat-count { font-size: 0.78rem; color: var(--text-muted); }
+
+.category-group-title {
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 18px 0 2px;
+}
+
+.category-group-title:first-child { margin-top: 0; }
+
+/* Vue phrases */
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 6px 0 12px;
+}
+
+.category-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.phrases-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phrase-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+}
+
+.phrase-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phrase-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.phrase-source {
+  font-weight: 600;
+  font-size: 1rem;
+  word-wrap: break-word;
+}
+
+.phrase-target {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-top: 2px;
+  word-wrap: break-word;
+}
+
+.line-flag {
+  margin-right: 6px;
+}
+
+.phrase-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.phrase-actions button {
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  padding: 6px;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.phrase-actions button.fav-btn.active {
+  color: var(--star);
+}
+
+.phrase-actions button:hover {
+  color: var(--accent);
+}
+
+.empty-msg {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* ---------- Mode plein écran ---------- */
+.big-mode {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 28px;
+}
+
+.big-mode.hidden { display: none; }
+
+.big-mode-text {
+  font-size: clamp(1.8rem, 8vw, 3.2rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.big-mode-close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.big-mode-speak {
+  width: 64px;
+  height: 64px;
+  font-size: 1.8rem;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+/* ---------- Panneau de choix de la voix italienne ---------- */
+.voice-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.voice-panel.hidden { display: none; }
+
+.voice-panel-inner {
+  background: var(--bg-elevated);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 18px 18px 0 0;
+  padding: 18px 16px max(18px, env(safe-area-inset-bottom));
+  max-height: 75vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.voice-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.voice-panel-header h2 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.voice-panel-hint {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 14px;
+}
+
+.voice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.voice-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.voice-item.selected {
+  border-color: var(--accent);
+}
+
+.voice-item-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.voice-item.selected .voice-item-name {
+  color: var(--accent);
+}
+
+.voice-play-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 4px 8px;
+}
+
+/* ---------- Bandeau hors-ligne ---------- */
+.offline-banner {
+  position: fixed;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  box-shadow: var(--shadow);
+  z-index: 50;
+}
+
+.offline-banner.hidden { display: none; }
+
+/* ---------- Responsive : tablette / desktop ---------- */
+@media (min-width: 640px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
